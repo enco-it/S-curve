@@ -1149,6 +1149,8 @@ def patch_html(projects: dict[str, dict], as_of: str) -> None:
     html = render_html(projects, as_of)
     html = patch_html_catalog(html, as_of)
     HTML.write_text(html, encoding="utf-8")
+    # GitHub Pages serves index.html from the repo root.
+    (ROOT / "index.html").write_text(html, encoding="utf-8")
 
 
 def stamp_export_headers(text: str, exported_at: datetime) -> str:
