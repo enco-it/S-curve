@@ -15,6 +15,29 @@ from pathlib import Path
 
 TOKEN = os.environ.get("JIRA_TOKEN", "")
 BASE = "https://task.enco.ru/rest/api/2"
+
+
+def read_json(path: Path):
+    raw = path.read_bytes()
+    for enc in ("utf-8", "cp1251"):
+        try:
+            return json.loads(raw.decode(enc))
+        except UnicodeDecodeError:
+            continue
+    return json.loads(raw.decode("utf-8", errors="replace"))
+
+
+def write_json(path: Path, data, *, indent: int | None = None) -> None:
+    path.write_text(
+        json.dumps(data, ensure_ascii=False, indent=indent),
+        encoding="utf-8",
+    )
+
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 FIELDS = (
     "summary,issuetype,status,created,customfield_10506,customfield_12100,"
     "customfield_10501,customfield_10502,customfield_10503,customfield_10504,"
@@ -136,7 +159,10 @@ def plan_dates_from_fields(f: dict) -> dict:
 def fetch_issue(key: str, cache_dir: Path) -> dict:
     cache_path = cache_dir / f"{key}.json"
     if cache_path.exists():
-        return json.load(open(cache_path))
+        try:
+            return read_json(cache_path)
+        except (UnicodeDecodeError, json.JSONDecodeError, OSError):
+            cache_path.unlink(missing_ok=True)
     raw = api(f"/issue/{key}?expand=changelog&fields={FIELDS}")
     f = raw["fields"]
     events = []
@@ -168,7 +194,7 @@ def fetch_issue(key: str, cache_dir: Path) -> dict:
         },
         "events": events,
     }
-    json.dump(data, open(cache_path, "w"), ensure_ascii=False)
+    write_json(cache_path, data)
     return data
 
 
@@ -219,7 +245,7 @@ def load_series_from_cache(proj: str) -> dict:
     for path in sorted(cache_dir.glob("*.json")):
         if path.name.startswith("_"):
             continue
-        data = json.load(open(path))
+        data = read_json(path)
         series[data["key"]] = series_from_issue_data(data)
     if not series:
         raise SystemExit(f"Empty cache for {proj}")
@@ -328,7 +354,10 @@ def fetch_epic_hierarchy(epic_key: str, cache_dir: Path, force: bool = False) ->
     hier_dir.mkdir(parents=True, exist_ok=True)
     cache_path = hier_dir / f"{epic_key}.json"
     if cache_path.exists() and not force:
-        return json.load(open(cache_path))
+        try:
+            return read_json(cache_path)
+        except (UnicodeDecodeError, json.JSONDecodeError, OSError):
+            cache_path.unlink(missing_ok=True)
 
     jql = (
         f'"Ссылка на эпик" = {epic_key} AND issuetype in (История, Задача)'
@@ -386,14 +415,17 @@ def fetch_epic_hierarchy(epic_key: str, cache_dir: Path, force: bool = False) ->
             nodes[k] = stub
 
     tree = build_porozhdaet_tree(nodes, edges)
-    json.dump(tree, open(cache_path, "w"), ensure_ascii=False)
+    write_json(cache_path, tree)
     return tree
 
 
 def load_hierarchy_cached(epic_key: str, cache_dir: Path) -> list[dict]:
     path = cache_dir / "_hier" / f"{epic_key}.json"
     if path.exists():
-        return json.load(open(path))
+        try:
+            return read_json(path)
+        except (UnicodeDecodeError, json.JSONDecodeError, OSError):
+            path.unlink(missing_ok=True)
     return []
 
 
@@ -947,6 +979,15 @@ def emit_project_names_ts() -> str:
     return "\n".join(lines)
 
 
+def emit_project_updated_at_ts(updated_map: dict[str, str], fallback: str) -> str:
+    lines = ["const PROJECT_UPDATED_AT: Record<string, string> = {"]
+    for pid in ALL_PROJECTS:
+        ts = (updated_map.get(pid) or fallback)[:10]
+        lines.append(f'  {pid}: "{ts}",')
+    lines.append("};")
+    return "\n".join(lines)
+
+
 def patch_canvas_catalog(text: str, snapshot: str) -> str:
     text = re.sub(
         r"/\*\* S-curve · .*? \*/",
@@ -981,7 +1022,7 @@ def patch_canvas_catalog(text: str, snapshot: str) -> str:
     return text
 
 
-def patch_html_catalog(text: str) -> str:
+def patch_html_catalog(text: str, as_of: str | None = None) -> str:
     banner = projects_banner()
     text = re.sub(
         r"<title>.*?</title>",
@@ -990,6 +1031,13 @@ def patch_html_catalog(text: str) -> str:
         count=1,
         flags=re.S,
     )
+    if as_of:
+        text = re.sub(
+            r'(<p class="meta">Источник: task\.enco\.ru · снимок ).*?(\s· без общей кривой по проектам</p>)',
+            rf"\g<1>{as_of}\2",
+            text,
+            count=1,
+        )
     text = re.sub(
         r"<b>Проект</b> — только один: .*?\.",
         f"<b>Проект</b> — один из {len(ALL_PROJECTS)} (общей кривой нет).",
@@ -1019,15 +1067,13 @@ def patch_canvas(projects: dict[str, dict], updated_map: dict[str, str]) -> None
         text,
         count=1,
     )
-    for pid, ts in updated_map.items():
-        text = re.sub(
-            rf'(\s{re.escape(pid)}:\s)"[^"]+"',
-            rf'\1"{ts[:10]}"',
-            text,
-            count=1,
-            flags=re.MULTILINE,
-        )
     snapshot = max(updated_map.values())[:10] if updated_map else date.today().isoformat()
+    text = re.sub(
+        r"const PROJECT_UPDATED_AT: Record<string, string> = \{[\s\S]*?\n\};",
+        emit_project_updated_at_ts(updated_map, snapshot),
+        text,
+        count=1,
+    )
     text = patch_canvas_catalog(text, snapshot)
     CANVAS.write_text(text, encoding="utf-8")
 
@@ -1035,7 +1081,7 @@ def patch_canvas(projects: dict[str, dict], updated_map: dict[str, str]) -> None
 def patch_sidecar(projects: dict[str, dict]) -> None:
     data = {}
     if SIDECAR.exists():
-        data = json.load(open(SIDECAR))
+        data = read_json(SIDECAR)
     live = data.get("scurve-jira-data", {})
     for pid, p in projects.items():
         live[pid] = json.loads(json.dumps(p))  # NaN -> null via custom below
@@ -1052,9 +1098,12 @@ def patch_sidecar(projects: dict[str, dict]) -> None:
                     None if v is None else v for v in view[arr_key]
                 ]
     data["scurve-jira-data"] = live
+    pending = data.setdefault("scurve-refresh-pending", {})
     for pid in projects:
-        data.setdefault("scurve-refresh-pending", {}).pop(pid, None)
-    json.dump(data, open(SIDECAR, "w"), ensure_ascii=False, indent=2)
+        pending.pop(pid, None)
+    if set(projects) >= set(ALL_PROJECTS):
+        pending.pop("ALL", None)
+    write_json(SIDECAR, data, indent=2)
 
 
 def project_to_html(p: dict) -> dict:
@@ -1098,8 +1147,10 @@ def render_html(projects: dict[str, dict], as_of: str) -> str:
 
 def patch_html(projects: dict[str, dict], as_of: str) -> None:
     html = render_html(projects, as_of)
-    html = patch_html_catalog(html)
+    html = patch_html_catalog(html, as_of)
     HTML.write_text(html, encoding="utf-8")
+    # GitHub Pages serves index.html from the repo root.
+    (ROOT / "index.html").write_text(html, encoding="utf-8")
 
 
 def stamp_export_headers(text: str, exported_at: datetime) -> str:
@@ -1165,10 +1216,10 @@ def export_html_snapshot() -> Path:
     # Reflect export in canvas sidecar so the UI can show the last path.
     data = {}
     if SIDECAR.exists():
-        data = json.load(open(SIDECAR))
+        data = read_json(SIDECAR)
     data["scurve-export-pending"] = ""
     data["scurve-last-export"] = str(out)
-    json.dump(data, open(SIDECAR, "w"), ensure_ascii=False, indent=2)
+    write_json(SIDECAR, data, indent=2)
     return out
 
 
