@@ -13781,6 +13781,38 @@ function milestoneCaption(key: string, summary: string): string {
   return cut ? `${key} · ${cut}` : key;
 }
 
+function layoutMilestoneLabels<T extends { x: number }>(
+  rows: T[],
+  nearPx: number,
+  xMin: number,
+  xMax: number,
+): Array<T & { side: -1 | 1; stack: number }> {
+  const clusters: T[][] = [];
+  for (const r of rows) {
+    const last = clusters[clusters.length - 1];
+    if (last && r.x - last[last.length - 1].x < nearPx) last.push(r);
+    else clusters.push([r]);
+  }
+  const out: Array<T & { side: -1 | 1; stack: number }> = [];
+  for (const cluster of clusters) {
+    const startRight = cluster[0].x - xMin < 36;
+    cluster.forEach((r, i) => {
+      let side: -1 | 1;
+      if (cluster.length === 1) {
+        side = xMax - r.x >= r.x - xMin ? 1 : -1;
+      } else if (startRight) {
+        side = i % 2 === 0 ? 1 : -1;
+      } else {
+        side = i % 2 === 0 ? -1 : 1;
+      }
+      if (r.x - xMin < 20) side = 1;
+      if (xMax - r.x < 20) side = -1;
+      out.push({ ...r, side, stack: Math.floor(i / 2) });
+    });
+  }
+  return out;
+}
+
 function SCurvePlot({
   categories,
   pointDates,
@@ -13823,14 +13855,7 @@ function SCurvePlot({
       });
     }
     const rows = [...map.values()].sort((a, b) => a.x - b.x);
-    let lastX = -999;
-    let lane = 0;
-    return rows.map((r) => {
-      if (r.x - lastX < 16) lane += 1;
-      else lane = 0;
-      lastX = r.x;
-      return { ...r, lane };
-    });
+    return layoutMilestoneLabels(rows, 22, x0, x1);
   })();
 
   const ticks = [0, 25, 50, 75, 100];
@@ -13918,16 +13943,16 @@ function SCurvePlot({
           );
         })}
         {labels.map((r) => {
-          const tx = r.x + 6 + r.lane * 11;
-          const ty = padT + innerH - 4;
+          const tx = r.x + r.side * 5;
+          const ty = padT + 11 + r.stack * 13;
           return (
             <text
               key={`lbl-${r.key}`}
               x={tx}
               y={ty}
+              textAnchor={r.side < 0 ? "end" : "start"}
               fill={theme.text.secondary}
               fontSize={9}
-              transform={`rotate(-90 ${tx} ${ty})`}
             >
               {milestoneCaption(r.key, r.summary)}
               <title>{`${r.key} · ${r.summary}`}</title>
