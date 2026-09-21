@@ -4,10 +4,15 @@
 from __future__ import annotations
 
 import argparse
+import gzip
+import http.client
 import json
 import os
 import re
+import socket
 import sys
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import date, datetime, timedelta
@@ -106,15 +111,59 @@ EXPORTS = ROOT / "exports"
 CACHE_ROOT = Path("/tmp/amsp_cache_projects")
 
 
-def api(path: str) -> dict:
+def _read_json_response(resp) -> dict:
+    raw = resp.read()
+    encoding = (resp.headers.get("Content-Encoding") or "").lower()
+    if "gzip" in encoding:
+        raw = gzip.decompress(raw)
+    return json.loads(raw.decode("utf-8"))
+
+
+def api(path: str, *, timeout: int = 180, retries: int = 5) -> dict:
     if not TOKEN:
         raise SystemExit("JIRA_TOKEN is not set")
     req = urllib.request.Request(
         BASE + path,
-        headers={"Authorization": f"Bearer {TOKEN}", "Accept": "application/json"},
+        headers={
+            "Authorization": f"Bearer {TOKEN}",
+            "Accept": "application/json",
+            "Accept-Encoding": "gzip, deflate",
+        },
     )
-    with urllib.request.urlopen(req, timeout=180) as resp:
-        return json.load(resp)
+    last_err: Exception | None = None
+    retryable_read = (
+        socket.timeout,
+        TimeoutError,
+        http.client.IncompleteRead,
+        ConnectionError,
+        OSError,
+    )
+    attempts = max(retries, 1)
+    for attempt in range(1, attempts + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return _read_json_response(resp)
+        except urllib.error.HTTPError as err:
+            last_err = err
+            if err.code not in (429, 502, 503, 504) or attempt == attempts:
+                raise
+            wait = min(8 * attempt, 30)
+            print(
+                f"  retry {attempt}/{attempts} after HTTP {err.code} (sleep {wait}s)",
+                file=sys.stderr,
+            )
+            time.sleep(wait)
+        except retryable_read as err:
+            last_err = err
+            if attempt == attempts:
+                raise
+            wait = min(8 * attempt, 30)
+            print(
+                f"  retry {attempt}/{attempts} after {type(err).__name__}: {err} (sleep {wait}s)",
+                file=sys.stderr,
+            )
+            time.sleep(wait)
+    raise last_err or SystemExit("Jira API failed")
 
 
 def parse_dt(s: str | None) -> datetime | None:
@@ -157,15 +206,7 @@ def plan_dates_from_fields(f: dict) -> dict:
     }
 
 
-def fetch_issue(key: str, cache_dir: Path) -> dict:
-    cache_path = cache_dir / f"{key}.json"
-    if cache_path.exists():
-        try:
-            return read_json(cache_path)
-        except (UnicodeDecodeError, json.JSONDecodeError, OSError):
-            cache_path.unlink(missing_ok=True)
-    raw = api(f"/issue/{key}?expand=changelog&fields={FIELDS}")
-    f = raw["fields"]
+def events_from_changelog(raw: dict) -> list[dict]:
     events = []
     for h in raw.get("changelog", {}).get("histories", []):
         for it in h.get("items", []):
@@ -177,22 +218,75 @@ def fetch_issue(key: str, cache_dir: Path) -> dict:
                         "to": parse_num(it.get("toString")),
                     }
                 )
+    return events
+
+
+def issue_fields_payload(f: dict) -> dict:
+    return {
+        "summary": f["summary"],
+        "issuetype": f["issuetype"]["name"],
+        "status": f["status"]["name"],
+        "created": f["created"],
+        "customfield_10506": f.get("customfield_10506"),
+        "customfield_12100": f.get("customfield_12100"),
+        "customfield_10501": f.get("customfield_10501"),
+        "customfield_10502": f.get("customfield_10502"),
+        "customfield_10503": f.get("customfield_10503"),
+        "customfield_10504": f.get("customfield_10504"),
+        "customfield_11901": f.get("customfield_11901"),
+        "customfield_11902": f.get("customfield_11902"),
+    }
+
+
+def fetch_issue(key: str, cache_dir: Path) -> dict:
+    cache_path = cache_dir / f"{key}.json"
+    if cache_path.exists():
+        try:
+            return read_json(cache_path)
+        except (UnicodeDecodeError, json.JSONDecodeError, OSError):
+            cache_path.unlink(missing_ok=True)
+    print(f"  issue {key}...")
+    try:
+        raw = api(
+            f"/issue/{key}?expand=changelog&fields={FIELDS}",
+            timeout=180,
+            retries=3,
+        )
+        f = raw["fields"]
+        events = events_from_changelog(raw)
+    except (socket.timeout, TimeoutError, http.client.IncompleteRead, OSError) as err:
+        print(
+            f"  {key}: changelog failed ({type(err).__name__}), fields only",
+            file=sys.stderr,
+        )
+        raw = api(f"/issue/{key}?fields={FIELDS}", timeout=60, retries=3)
+        f = raw["fields"]
+        events = []
+        created = f.get("created")
+        if created:
+            plan_now = parse_num(f.get("customfield_12100"))
+            fact_now = parse_num(f.get("customfield_10506"))
+            if plan_now:
+                events.append({"at": created, "field": "plan", "to": 0.0})
+                events.append(
+                    {
+                        "at": datetime.now().astimezone().isoformat(timespec="seconds"),
+                        "field": "plan",
+                        "to": plan_now,
+                    }
+                )
+            if fact_now:
+                events.append({"at": created, "field": "fact", "to": 0.0})
+                events.append(
+                    {
+                        "at": datetime.now().astimezone().isoformat(timespec="seconds"),
+                        "field": "fact",
+                        "to": fact_now,
+                    }
+                )
     data = {
         "key": key,
-        "fields": {
-            "summary": f["summary"],
-            "issuetype": f["issuetype"]["name"],
-            "status": f["status"]["name"],
-            "created": f["created"],
-            "customfield_10506": f.get("customfield_10506"),
-            "customfield_12100": f.get("customfield_12100"),
-            "customfield_10501": f.get("customfield_10501"),
-            "customfield_10502": f.get("customfield_10502"),
-            "customfield_10503": f.get("customfield_10503"),
-            "customfield_10504": f.get("customfield_10504"),
-            "customfield_11901": f.get("customfield_11901"),
-            "customfield_11902": f.get("customfield_11902"),
-        },
+        "fields": issue_fields_payload(f),
         "events": events,
     }
     write_json(cache_path, data)
