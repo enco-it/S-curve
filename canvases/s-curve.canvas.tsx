@@ -13795,7 +13795,7 @@ function layoutMilestoneLabels<T extends { x: number }>(
   }
   const out: Array<T & { side: -1 | 1; stack: number }> = [];
   for (const cluster of clusters) {
-    const startRight = cluster[0].x - xMin < 36;
+    const startRight = cluster[0].x - xMin < 16;
     cluster.forEach((r, i) => {
       let side: -1 | 1;
       if (cluster.length === 1) {
@@ -13805,8 +13805,8 @@ function layoutMilestoneLabels<T extends { x: number }>(
       } else {
         side = i % 2 === 0 ? -1 : 1;
       }
-      if (r.x - xMin < 20) side = 1;
-      if (xMax - r.x < 20) side = -1;
+      if (r.x - xMin < 12) side = 1;
+      if (xMax - r.x < 12) side = -1;
       out.push({ ...r, side, stack: Math.floor(i / 2) });
     });
   }
@@ -13855,7 +13855,7 @@ function SCurvePlot({
       });
     }
     const rows = [...map.values()].sort((a, b) => a.x - b.x);
-    return layoutMilestoneLabels(rows, 22, x0, x1);
+    return layoutMilestoneLabels(rows, 14, x0, x1);
   })();
 
   const ticks = [0, 25, 50, 75, 100];
@@ -13943,20 +13943,22 @@ function SCurvePlot({
           );
         })}
         {labels.map((r) => {
-          const tx = r.x + r.side * 5;
-          const ty = padT + 11 + r.stack * 13;
+          const tx = r.x + r.side * 6;
+          const ty = padT + 6 + r.stack * 11;
           return (
-            <text
-              key={`lbl-${r.key}`}
-              x={tx}
-              y={ty}
-              textAnchor={r.side < 0 ? "end" : "start"}
-              fill={theme.text.secondary}
-              fontSize={9}
-            >
-              {milestoneCaption(r.key, r.summary)}
-              <title>{`${r.key} · ${r.summary}`}</title>
-            </text>
+            <g key={`lbl-${r.key}`} transform={`translate(${tx} ${ty}) rotate(-90)`}>
+              <text
+                x={0}
+                y={0}
+                textAnchor="end"
+                dominantBaseline="middle"
+                fill={theme.text.secondary}
+                fontSize={9}
+              >
+                {milestoneCaption(r.key, r.summary)}
+                <title>{`${r.key} · ${r.summary}`}</title>
+              </text>
+            </g>
           );
         })}
         {series.map((s) =>

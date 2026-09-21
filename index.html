@@ -857,30 +857,32 @@ const milestoneLinePlugin = {
     const clusters=[];
     for(const r of rows){
       const last=clusters[clusters.length-1];
-      if(last && r.x-last[last.length-1].x<22) last.push(r);
+      if(last && r.x-last[last.length-1].x<14) last.push(r);
       else clusters.push([r]);
     }
     ctx.save();
     ctx.fillStyle = "#c8cdd4";
     ctx.font = "11px Segoe UI, system-ui, sans-serif";
-    ctx.textBaseline = "top";
     for(const cluster of clusters){
-      const startRight = cluster[0].x - chartArea.left < 36;
+      const startRight = cluster[0].x - chartArea.left < 16;
       cluster.forEach((r,i)=>{
         let side;
         if(cluster.length===1) side = (chartArea.right-r.x >= r.x-chartArea.left) ? 1 : -1;
         else if(startRight) side = i%2===0 ? 1 : -1;
         else side = i%2===0 ? -1 : 1;
-        if(r.x-chartArea.left<20) side=1;
-        if(chartArea.right-r.x<20) side=-1;
+        if(r.x-chartArea.left<12) side=1;
+        if(chartArea.right-r.x<12) side=-1;
         const stack=Math.floor(i/2);
         const s=(r.summary||"").replace(/\s+/g," ").trim();
         const cut=s.length>26?s.slice(0,25)+"…":s;
         const label=cut?`${r.key} · ${cut}`:r.key;
-        const x=r.x+side*5;
-        const y=chartArea.top+4+stack*14;
-        ctx.textAlign = side<0 ? "right" : "left";
-        ctx.fillText(label, x, y);
+        ctx.save();
+        ctx.translate(r.x+side*6, chartArea.top+6+stack*12);
+        ctx.rotate(-Math.PI/2);
+        ctx.textAlign = "right";
+        ctx.textBaseline = "middle";
+        ctx.fillText(label, 0, 0);
+        ctx.restore();
       });
     }
     ctx.restore();
