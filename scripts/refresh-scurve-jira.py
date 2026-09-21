@@ -55,6 +55,7 @@ JQL_TEMPLATE = (
 )
 LINK_TYPE_PARENT_CHILD = "Parent-Child"
 CHILD_ISSUE_TYPES = {"История", "Задача", "Story", "Task"}
+MILESTONE_TYPES = {"Задача", "Task"}
 PROJECT_LABELS = {
     "KKP": "Казань Клубная ГП-16.004",
     "KK": "Казань Клубная ГП-16.001–003",
@@ -505,6 +506,93 @@ def schedule_plan(iss: dict, on_date: date) -> float:
     return 100.0 * (on_date - d0).days / max((d1 - d0).days, 1)
 
 
+def num_or_none(v) -> float | None:
+    if v is None or v == "":
+        return None
+    if isinstance(v, (int, float)) and not isinstance(v, bool):
+        return float(v)
+    return parse_num(v)
+
+
+def forecast_end_date(iss: dict, today: date) -> str | None:
+    """Ожидаемая дата окончания вехи: закрытая → факт; иначе растяжка остатка работ."""
+    fact = num_or_none(iss.get("fact_now")) or 0.0
+    plan = num_or_none(iss.get("plan_now"))
+    if plan is None:
+        plan = schedule_plan(iss, today)
+    end_plan = iss.get("end_plan")
+    end_fact = iss.get("end_fact")
+    if fact >= 99.9:
+        return end_fact or end_plan
+    if not end_plan:
+        return end_fact
+    end = date.fromisoformat(end_plan)
+    start_s = iss.get("start_plan")
+    start = date.fromisoformat(start_s) if start_s else None
+    rem_work = max(100.0 - fact, 0.0) / 100.0
+    if rem_work <= 0:
+        return today.isoformat()
+    rem_plan_pct = max(100.0 - plan, 0.01) / 100.0
+    if today >= end or plan >= 99.9:
+        dur = max((end - start).days, 1) if start else 30
+        return (today + timedelta(days=max(round(dur * rem_work), 1))).isoformat()
+    rem_days = max((end - today).days, 1)
+    stretch = rem_work / rem_plan_pct
+    return (today + timedelta(days=round(rem_days * stretch))).isoformat()
+
+
+def build_milestones(issue_series: dict, today: date) -> list[dict]:
+    out: list[dict] = []
+    for k in sort_issue_keys(list(issue_series.keys())):
+        iss = issue_series[k]
+        if iss.get("type") not in MILESTONE_TYPES:
+            continue
+        fact = num_or_none(iss.get("fact_now")) or 0.0
+        status = (iss.get("status") or "").lower()
+        closed = fact >= 99.9 or status in {"закрыт", "done", "closed"}
+        out.append(
+            {
+                "key": k,
+                "summary": iss.get("summary") or "",
+                "endPlan": iss.get("end_plan"),
+                "endFact": (iss.get("end_fact") or iss.get("end_plan")) if closed else None,
+                "endForecast": forecast_end_date(iss, today),
+            }
+        )
+    return out
+
+
+def milestones_from_project_dict(p: dict, today: date) -> list[dict]:
+    """Вехи из уже собранного ProjectData (issues + views), без Jira."""
+    views = p.get("views") or {}
+    series: dict = {}
+    for row in p.get("issues") or []:
+        if row.get("type") not in MILESTONE_TYPES:
+            continue
+        key = row["key"]
+        v = views.get(key) or {}
+        start_plan = v.get("start_plan")
+        end_plan = v.get("end_plan")
+        period = row.get("period") or ""
+        if (not start_plan or not end_plan) and "→" in period:
+            left, right = [s.strip() for s in period.split("→", 1)]
+            if not start_plan and re.match(r"^\d{4}-\d{2}-\d{2}$", left):
+                start_plan = left
+            if not end_plan and re.match(r"^\d{4}-\d{2}-\d{2}$", right):
+                end_plan = right
+        series[key] = {
+            "summary": row.get("summary") or v.get("summary") or "",
+            "type": row.get("type"),
+            "status": row.get("status") or v.get("status") or "",
+            "plan_now": v.get("plan_now") if v.get("plan_now") is not None else row.get("plan"),
+            "fact_now": v.get("fact_now") if v.get("fact_now") is not None else row.get("fact"),
+            "start_plan": start_plan,
+            "end_plan": end_plan,
+            "end_fact": v.get("end_fact"),
+        }
+    return build_milestones(series, today)
+
+
 def forecast_linear_issue(iss: dict, d: date, today: date) -> float:
     if d <= today:
         return hist_value(iss, "fact", d)
@@ -795,6 +883,7 @@ def build_project(
         options,
         issues_table,
         updated_at,
+        build_milestones(issue_series, today),
     )
 
 
@@ -843,6 +932,7 @@ def build_empty_project(proj: str, today: date, updated_at: str) -> dict:
         [{"value": "ALL", "label": f"Весь проект {proj} (0 этапов)"}],
         [],
         updated_at,
+        [],
     )
 
 
@@ -863,6 +953,7 @@ def build_project_payload(
     options: list[dict],
     issues_table: list[dict],
     updated_at: str,
+    milestones: list[dict] | None = None,
 ) -> dict:
     return {
         "id": proj,
@@ -886,6 +977,7 @@ def build_project_payload(
         "options": options,
         "issues": issues_table,
         "views": views,
+        "milestones": milestones or [],
         "dataUpdatedAt": updated_at,
     }
 
@@ -952,6 +1044,7 @@ def emit_project(pid: str, p: dict) -> str:
     lines.append(f"    ahead: {json.dumps(p['ahead'], ensure_ascii=False)},")
     lines.append(f"    options: {json.dumps(p['options'], ensure_ascii=False)},")
     lines.append(f"    issues: {json.dumps(p['issues'], ensure_ascii=False)},")
+    lines.append(f"    milestones: {json.dumps(p.get('milestones') or [], ensure_ascii=False)},")
     lines.append("    views: {")
     for k, v in p["views"].items():
         lines.append(emit_view(k, v))
@@ -1126,6 +1219,7 @@ def project_to_html(p: dict) -> dict:
         "issues": p["issues"],
         "behind": p["behind"],
         "ahead": p["ahead"],
+        "milestones": p.get("milestones") or [],
     }
     # JSON cannot encode NaN; views arrays already use None in sidecar path,
     # but canvas-built dicts may still have None for missing forecast points.
@@ -1223,9 +1317,43 @@ def export_html_snapshot() -> Path:
     return out
 
 
+def load_embedded_projects() -> dict[str, dict]:
+    if SIDECAR.exists():
+        data = read_json(SIDECAR)
+        live = data.get("scurve-jira-data") or {}
+        if live:
+            return live
+    raise SystemExit(f"No sidecar projects at {SIDECAR}")
+
+
+def patch_milestones_only() -> None:
+    today = date.today()
+    built = load_embedded_projects()
+    for pid, p in built.items():
+        p["milestones"] = milestones_from_project_dict(p, today)
+        n = len(p["milestones"])
+        print(f"  {pid}: {n} вех")
+    updated_map = {
+        pid: (p.get("dataUpdatedAt") or today.isoformat())[:10]
+        for pid, p in built.items()
+    }
+    patch_canvas(built, updated_map)
+    patch_sidecar(built)
+    as_of = max(updated_map.values()) if updated_map else today.isoformat()
+    patch_html(built, as_of=as_of)
+    print(f"Updated canvas: {CANVAS}")
+    print(f"Updated sidecar: {SIDECAR}")
+    print(f"Updated HTML: {HTML}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--project", choices=ALL_PROJECTS + ["ALL"])
+    parser.add_argument(
+        "--milestones-only",
+        action="store_true",
+        help="recompute milestone markers from existing sidecar/canvas data (no Jira)",
+    )
     parser.add_argument("--force", action="store_true", help="ignore issue cache")
     parser.add_argument(
         "--export-html",
@@ -1234,13 +1362,17 @@ def main() -> None:
     )
     args = parser.parse_args()
 
+    if args.milestones_only:
+        patch_milestones_only()
+        return
+
     if args.export_html:
         path = export_html_snapshot()
         print(f"Exported HTML: {path}")
         return
 
     if not args.project:
-        parser.error("--project is required unless --export-html")
+        parser.error("--project is required unless --export-html or --milestones-only")
 
     today = date.today()
     updated_at = datetime.now().astimezone().isoformat(timespec="seconds")

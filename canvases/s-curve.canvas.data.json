@@ -10861,7 +10861,58 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "AV9-2",
+          "summary": "Получение порубочного билета Айва 9, 11 ИРД",
+          "endPlan": "2025-08-29",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "AV9-4",
+          "summary": "РнС Айва 9, 11 ИРД (Внесение изменений)",
+          "endPlan": "2026-07-30",
+          "endFact": "2026-08-06",
+          "endForecast": "2026-08-06"
+        },
+        {
+          "key": "AV9-7",
+          "summary": "Старт продаж Айва 9, 11",
+          "endPlan": "2026-10-15",
+          "endFact": null,
+          "endForecast": "2026-10-15"
+        },
+        {
+          "key": "AV9-13",
+          "summary": "ЗОС Айва 9, 11",
+          "endPlan": "2029-09-14",
+          "endFact": null,
+          "endForecast": "2029-09-14"
+        },
+        {
+          "key": "AV9-15",
+          "summary": "РнВ Айва 9, 11",
+          "endPlan": "2029-10-18",
+          "endFact": null,
+          "endForecast": "2029-10-18"
+        },
+        {
+          "key": "AV9-327",
+          "summary": "Выдача ключей Айва 9, 11",
+          "endPlan": "2029-12-31",
+          "endFact": null,
+          "endForecast": "2029-12-31"
+        },
+        {
+          "key": "AV9-492",
+          "summary": "Проверка ИРД до выхода из экспертизы Айва 9, 11",
+          "endPlan": "2026-05-25",
+          "endFact": "2026-05-26",
+          "endForecast": "2026-05-26"
+        }
+      ]
     },
     "AMSP": {
       "id": "AMSP",
@@ -19849,7 +19900,51 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "AMSP-17",
+          "summary": "Получение порубочного билета Амундсена ИРД",
+          "endPlan": "2025-09-01",
+          "endFact": "2025-09-01",
+          "endForecast": "2025-09-01"
+        },
+        {
+          "key": "AMSP-20",
+          "summary": "Получение РнС Амундсена ИРД",
+          "endPlan": "2025-06-25",
+          "endFact": "2025-06-25",
+          "endForecast": "2025-06-25"
+        },
+        {
+          "key": "AMSP-30",
+          "summary": "Старт продаж Амундсена СП",
+          "endPlan": "2025-12-04",
+          "endFact": "2025-12-04",
+          "endForecast": "2025-12-04"
+        },
+        {
+          "key": "AMSP-290",
+          "summary": "ЗОС Амундсена",
+          "endPlan": "2028-10-05",
+          "endFact": null,
+          "endForecast": "2028-10-05"
+        },
+        {
+          "key": "AMSP-293",
+          "summary": "РнВ Амундсена",
+          "endPlan": "2028-10-30",
+          "endFact": null,
+          "endForecast": "2028-10-30"
+        },
+        {
+          "key": "AMSP-296",
+          "summary": "Выдача ключей",
+          "endPlan": "2028-11-30",
+          "endFact": null,
+          "endForecast": "2028-11-30"
+        }
+      ]
     },
     "AV12": {
       "id": "AV12",
@@ -27885,7 +27980,51 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "AV12-2",
+          "summary": "Получение порубочного билета Айва 12-13 ИРД",
+          "endPlan": "2024-12-27",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "AV12-4",
+          "summary": "Получение РнС Айва 12-13 ИРД",
+          "endPlan": "2025-03-28",
+          "endFact": "2025-03-28",
+          "endForecast": "2025-03-28"
+        },
+        {
+          "key": "AV12-7",
+          "summary": "Старт продаж Айва 12-13 СП",
+          "endPlan": "2025-10-16",
+          "endFact": "2025-10-16",
+          "endForecast": "2025-10-16"
+        },
+        {
+          "key": "AV12-13",
+          "summary": "ЗОС Айва 12-13",
+          "endPlan": "2027-10-25",
+          "endFact": null,
+          "endForecast": "2027-10-25"
+        },
+        {
+          "key": "AV12-15",
+          "summary": "РнВ Айва 12-13",
+          "endPlan": "2027-11-29",
+          "endFact": null,
+          "endForecast": "2027-11-29"
+        },
+        {
+          "key": "AV12-331",
+          "summary": "Выдача ключей Айва 12-13",
+          "endPlan": "2027-12-31",
+          "endFact": null,
+          "endForecast": "2027-12-31"
+        }
+      ]
     },
     "KK": {
       "id": "KK",
@@ -40039,7 +40178,58 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "KK-4",
+          "summary": "АГО ЖК Клубная",
+          "endPlan": "2026-06-19",
+          "endFact": "2026-07-15",
+          "endForecast": "2026-07-15"
+        },
+        {
+          "key": "KK-6",
+          "summary": "РнС ЖК Клубная",
+          "endPlan": "2026-07-13",
+          "endFact": "2026-07-15",
+          "endForecast": "2026-07-15"
+        },
+        {
+          "key": "KK-9",
+          "summary": "Старт продаж ЖК Клубная",
+          "endPlan": "2026-09-17",
+          "endFact": "2026-09-07",
+          "endForecast": "2026-09-07"
+        },
+        {
+          "key": "KK-16",
+          "summary": "ЗОС ЖК Клубная",
+          "endPlan": "2028-10-27",
+          "endFact": null,
+          "endForecast": "2028-10-27"
+        },
+        {
+          "key": "KK-18",
+          "summary": "РнВ ЖК Клубная",
+          "endPlan": "2028-11-27",
+          "endFact": null,
+          "endForecast": "2028-11-27"
+        },
+        {
+          "key": "KK-520",
+          "summary": "Получение порубочного билета ЖК Клубная",
+          "endPlan": "2026-10-15",
+          "endFact": null,
+          "endForecast": "2026-11-06"
+        },
+        {
+          "key": "KK-612",
+          "summary": "Выдача ключей",
+          "endPlan": "2028-12-30",
+          "endFact": null,
+          "endForecast": "2028-12-30"
+        }
+      ]
     },
     "KKP": {
       "id": "KKP",
@@ -45324,7 +45514,37 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "KKP-2",
+          "summary": "РнС Клубная паркинг",
+          "endPlan": "2026-07-13",
+          "endFact": "2026-07-17",
+          "endForecast": "2026-07-17"
+        },
+        {
+          "key": "KKP-3",
+          "summary": "Старт продаж Клубная паркинг",
+          "endPlan": "2026-09-09",
+          "endFact": null,
+          "endForecast": "2026-10-04"
+        },
+        {
+          "key": "KKP-8",
+          "summary": "ЗОС Клубная паркинг",
+          "endPlan": "2028-10-27",
+          "endFact": null,
+          "endForecast": "2028-10-27"
+        },
+        {
+          "key": "KKP-207",
+          "summary": "АГО Клубная паркинг",
+          "endPlan": "2026-06-19",
+          "endFact": "2026-06-19",
+          "endForecast": "2026-06-19"
+        }
+      ]
     },
     "H2O": {
       "id": "H2O",
@@ -67648,7 +67868,86 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "H2O-64",
+          "summary": "РнС корректировка гостиницы категории 1* (3 ОКСа)",
+          "endPlan": "2026-11-26",
+          "endFact": null,
+          "endForecast": "2026-11-26"
+        },
+        {
+          "key": "H2O-65",
+          "summary": "РнС корректировка гостиница категории 3* РОБИНЗОН",
+          "endPlan": "2026-10-15",
+          "endFact": null,
+          "endForecast": "2026-10-15"
+        },
+        {
+          "key": "H2O-66",
+          "summary": "РнС корректировка гостиница категории 5*",
+          "endPlan": "2026-12-30",
+          "endFact": null,
+          "endForecast": "2026-12-30"
+        },
+        {
+          "key": "H2O-86",
+          "summary": "Старт продаж",
+          "endPlan": "2026-12-08",
+          "endFact": null,
+          "endForecast": "2026-12-08"
+        },
+        {
+          "key": "H2O-119",
+          "summary": "Задание на испытание грунтов сваями (при наличии свайного фундамента)  (гостиницы категории 1*, 5*, 3*)",
+          "endPlan": "2026-07-27",
+          "endFact": "2026-07-31",
+          "endForecast": "2026-07-31"
+        },
+        {
+          "key": "H2O-454",
+          "summary": "ЗОС гостиницы категории 1*  (гостиницы категории 1*)",
+          "endPlan": "2028-11-30",
+          "endFact": null,
+          "endForecast": "2028-11-30"
+        },
+        {
+          "key": "H2O-457",
+          "summary": "РнВ гостиницы категории 1*  (гостиницы категории 1*)",
+          "endPlan": "2028-12-29",
+          "endFact": null,
+          "endForecast": "2028-12-29"
+        },
+        {
+          "key": "H2O-838",
+          "summary": "ЗОС гостиницы категории 5*  (гостиница категории 5*)",
+          "endPlan": "2028-11-30",
+          "endFact": null,
+          "endForecast": "2028-11-30"
+        },
+        {
+          "key": "H2O-841",
+          "summary": "РнВ гостиницы категории 5*  (гостиница категории 5*)",
+          "endPlan": "2028-12-29",
+          "endFact": null,
+          "endForecast": "2028-12-29"
+        },
+        {
+          "key": "H2O-1208",
+          "summary": "ЗОС гостиницы категории 3*  (гостиница категории 3*)",
+          "endPlan": "2028-11-30",
+          "endFact": null,
+          "endForecast": "2028-11-30"
+        },
+        {
+          "key": "H2O-1211",
+          "summary": "РнВ гостиницы категории 3*  (гостиница категории 3*)",
+          "endPlan": "2028-12-29",
+          "endFact": null,
+          "endForecast": "2028-12-29"
+        }
+      ]
     },
     "NN3S": {
       "id": "NN3S",
@@ -76632,7 +76931,37 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "NN3S-45",
+          "summary": "Внесение изменений в РнС",
+          "endPlan": "2026-10-30",
+          "endFact": null,
+          "endForecast": "2026-10-30"
+        },
+        {
+          "key": "NN3S-65",
+          "summary": "Старт продаж",
+          "endPlan": "2026-12-08",
+          "endFact": null,
+          "endForecast": "2026-12-08"
+        },
+        {
+          "key": "NN3S-441",
+          "summary": "ЗОС",
+          "endPlan": "2028-11-30",
+          "endFact": null,
+          "endForecast": "2028-11-30"
+        },
+        {
+          "key": "NN3S-444",
+          "summary": "РнВ",
+          "endPlan": "2028-12-30",
+          "endFact": null,
+          "endForecast": "2028-12-30"
+        }
+      ]
     },
     "AV6": {
       "id": "AV6",
@@ -88305,7 +88634,51 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "AV6-2",
+          "summary": "Получение порубочного билета Айва 6п, 7, 8 ИРД",
+          "endPlan": "2024-12-27",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "AV6-4",
+          "summary": "Получение РнС Айва 6п, 7, 8 ИРД",
+          "endPlan": "2024-12-27",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "AV6-7",
+          "summary": "Старт продаж Айва 6п, 7, 8 СП",
+          "endPlan": "2024-12-10",
+          "endFact": "2023-12-20",
+          "endForecast": "2023-12-20"
+        },
+        {
+          "key": "AV6-13",
+          "summary": "ЗОС Айва 6п, 7, 8",
+          "endPlan": "2026-09-11",
+          "endFact": null,
+          "endForecast": "2026-10-08"
+        },
+        {
+          "key": "AV6-15",
+          "summary": "РнВ Айва 6п, 7, 8",
+          "endPlan": "2026-09-30",
+          "endFact": null,
+          "endForecast": "2026-10-01"
+        },
+        {
+          "key": "AV6-284",
+          "summary": "Выдача ключей Айва 6п, 7, 8",
+          "endPlan": "2026-11-30",
+          "endFact": null,
+          "endForecast": "2026-11-30"
+        }
+      ]
     },
     "AV14": {
       "id": "AV14",
@@ -94443,7 +94816,51 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "AV14-2",
+          "summary": "Получение порубочного билета Айва 14 (холодный)ИРД",
+          "endPlan": "2024-12-27",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "AV14-4",
+          "summary": "Получение РнС Айва 14 (холодный) ИРД",
+          "endPlan": "2025-03-26",
+          "endFact": "2025-03-26",
+          "endForecast": "2025-03-26"
+        },
+        {
+          "key": "AV14-7",
+          "summary": "Старт продаж Айва 14 (холодный) СП",
+          "endPlan": "2025-05-19",
+          "endFact": "2025-05-19",
+          "endForecast": "2025-05-19"
+        },
+        {
+          "key": "AV14-13",
+          "summary": "ЗОС Айва 14 (холодный)",
+          "endPlan": "2026-09-07",
+          "endFact": null,
+          "endForecast": "2026-10-10"
+        },
+        {
+          "key": "AV14-15",
+          "summary": "РнВ Айва 14 (холодный)",
+          "endPlan": "2026-09-25",
+          "endFact": null,
+          "endForecast": "2026-09-27"
+        },
+        {
+          "key": "AV14-274",
+          "summary": "Выдача ключей Айва 14 (холодный)",
+          "endPlan": "2026-11-30",
+          "endFact": null,
+          "endForecast": "2026-11-30"
+        }
+      ]
     },
     "AV15": {
       "id": "AV15",
@@ -103783,7 +104200,72 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "AV15-2",
+          "summary": "Получение порубочного билета Айва 15 + ФОК ИРД",
+          "endPlan": "2024-12-27",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "AV15-4",
+          "summary": "Получение РнС Айва 15 + ФОК ИРД",
+          "endPlan": "2026-03-20",
+          "endFact": "2026-03-20",
+          "endForecast": "2026-03-20"
+        },
+        {
+          "key": "AV15-7",
+          "summary": "Старт продаж Айва 15 + ФОК СП",
+          "endPlan": "2027-03-31",
+          "endFact": null,
+          "endForecast": "2027-03-31"
+        },
+        {
+          "key": "AV15-13",
+          "summary": "ЗОС Айва 15 + ФОК",
+          "endPlan": "2028-12-21",
+          "endFact": null,
+          "endForecast": "2028-12-21"
+        },
+        {
+          "key": "AV15-15",
+          "summary": "РнВ Айва 15 + ФОК",
+          "endPlan": "2028-12-22",
+          "endFact": null,
+          "endForecast": "2028-12-22"
+        },
+        {
+          "key": "AV15-278",
+          "summary": "Выдача ключей Айва 15 + ФОК",
+          "endPlan": "2029-01-31",
+          "endFact": null,
+          "endForecast": "2029-01-31"
+        },
+        {
+          "key": "AV15-340",
+          "summary": "Заключение договора с DDХ Айва 15 + ФОК",
+          "endPlan": "2026-09-01",
+          "endFact": "2026-08-21",
+          "endForecast": "2026-08-21"
+        },
+        {
+          "key": "AV15-343",
+          "summary": "Внесение изменений в РнС Айва 15 + ФОК ИРД",
+          "endPlan": null,
+          "endFact": null,
+          "endForecast": null
+        },
+        {
+          "key": "AV15-344",
+          "summary": "Проверка ИРД перед выходом из экспертизы Айва 15 + ФОК ИРД",
+          "endPlan": null,
+          "endFact": null,
+          "endForecast": null
+        }
+      ]
     },
     "AV7": {
       "id": "AV7",
@@ -116185,7 +116667,51 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "AV7-20",
+          "summary": "Формирование пакета документов для получения РнС Айва 10",
+          "endPlan": "2026-12-25",
+          "endFact": null,
+          "endForecast": "2026-12-25"
+        },
+        {
+          "key": "AV7-21",
+          "summary": "РнС Айва 10 ИРД",
+          "endPlan": "2027-02-10",
+          "endFact": null,
+          "endForecast": "2027-02-10"
+        },
+        {
+          "key": "AV7-55",
+          "summary": "Старт продаж Айва 10 СП",
+          "endPlan": "2027-07-08",
+          "endFact": null,
+          "endForecast": "2027-07-08"
+        },
+        {
+          "key": "AV7-407",
+          "summary": "ЗОС Айва 10",
+          "endPlan": "2030-12-05",
+          "endFact": null,
+          "endForecast": "2030-12-05"
+        },
+        {
+          "key": "AV7-410",
+          "summary": "РнВ Айва 10",
+          "endPlan": "2030-12-25",
+          "endFact": null,
+          "endForecast": "2030-12-25"
+        },
+        {
+          "key": "AV7-411",
+          "summary": "Выдача ключей Айва 10",
+          "endPlan": "2031-01-31",
+          "endFact": null,
+          "endForecast": "2031-01-31"
+        }
+      ]
     },
     "PR6": {
       "id": "PR6",
@@ -124706,7 +125232,44 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "PR6-22",
+          "summary": "Получение порубочного билета ПРЕО 6 ИРД",
+          "endPlan": "2024-12-27",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "PR6-25",
+          "summary": "Получение РнС ПРЕО 6 ИРД",
+          "endPlan": "2023-12-20",
+          "endFact": "2023-12-20",
+          "endForecast": "2023-12-20"
+        },
+        {
+          "key": "PR6-33",
+          "summary": "Старт продаж ПРЕО 6 СП",
+          "endPlan": "2024-03-01",
+          "endFact": "2024-03-01",
+          "endForecast": "2024-03-01"
+        },
+        {
+          "key": "PR6-271",
+          "summary": "ЗОС ПРЕО 6",
+          "endPlan": "2025-11-28",
+          "endFact": "2025-11-28",
+          "endForecast": "2025-11-28"
+        },
+        {
+          "key": "PR6-274",
+          "summary": "РнВ ПРЕО 6",
+          "endPlan": "2025-12-31",
+          "endFact": "2025-12-18",
+          "endForecast": "2025-12-18"
+        }
+      ]
     },
     "PREO211": {
       "id": "PREO211",
@@ -135234,7 +135797,51 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "PREO211-2",
+          "summary": "Получение порубочного билета ПРЕО 7 ИРД",
+          "endPlan": "2024-12-27",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "PREO211-4",
+          "summary": "Получение РнС ПРЕО 7 ИРД",
+          "endPlan": "2024-10-30",
+          "endFact": "2024-10-30",
+          "endForecast": "2024-10-30"
+        },
+        {
+          "key": "PREO211-7",
+          "summary": "Старт продаж ПРЕО 7 СП",
+          "endPlan": "2024-11-20",
+          "endFact": "2024-11-20",
+          "endForecast": "2024-11-20"
+        },
+        {
+          "key": "PREO211-13",
+          "summary": "ЗОС ПРЕО 7",
+          "endPlan": "2026-10-12",
+          "endFact": null,
+          "endForecast": "2026-10-12"
+        },
+        {
+          "key": "PREO211-15",
+          "summary": "РнВ ПРЕО 7",
+          "endPlan": "2026-10-30",
+          "endFact": null,
+          "endForecast": "2026-10-30"
+        },
+        {
+          "key": "PREO211-309",
+          "summary": "Выдача ключей ПРЕО 7",
+          "endPlan": "2026-11-30",
+          "endFact": null,
+          "endForecast": "2026-11-30"
+        }
+      ]
     },
     "PREO213": {
       "id": "PREO213",
@@ -139459,7 +140066,51 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "PREO213-4",
+          "summary": "Получение РнС ПРЕО 7 ГП 72.213 ИРД",
+          "endPlan": "2024-10-30",
+          "endFact": "2024-10-30",
+          "endForecast": "2024-10-30"
+        },
+        {
+          "key": "PREO213-5",
+          "summary": "Принятие решения о финансировании на комитете/ открытие ПФ ПРЕО 7 ГП 72.213 ПФ",
+          "endPlan": "2024-12-27",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "PREO213-6",
+          "summary": "Старт продаж ПРЕО 7 ГП 72.213 СП",
+          "endPlan": "2024-11-20",
+          "endFact": "2024-11-20",
+          "endForecast": "2024-11-20"
+        },
+        {
+          "key": "PREO213-7",
+          "summary": "ЗОС ПРЕО 7 ГП 72.213",
+          "endPlan": "2026-10-12",
+          "endFact": null,
+          "endForecast": "2026-10-12"
+        },
+        {
+          "key": "PREO213-8",
+          "summary": "РнВ ПРЕО 7 ГП 72.213",
+          "endPlan": "2026-10-30",
+          "endFact": null,
+          "endForecast": "2026-10-30"
+        },
+        {
+          "key": "PREO213-219",
+          "summary": "Выдача ключей ПРЕО 7 ГП 72.213",
+          "endPlan": "2026-11-30",
+          "endFact": null,
+          "endForecast": "2026-11-30"
+        }
+      ]
     },
     "PREO8": {
       "id": "PREO8",
@@ -147141,7 +147792,51 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "PREO8-2",
+          "summary": "Получение порубочного билета ПРЕО 8 ИРД",
+          "endPlan": "2026-10-30",
+          "endFact": null,
+          "endForecast": "2026-10-31"
+        },
+        {
+          "key": "PREO8-4",
+          "summary": "Получение РнС ПРЕО 8 ИРД",
+          "endPlan": "2024-08-20",
+          "endFact": "2024-08-20",
+          "endForecast": "2024-08-20"
+        },
+        {
+          "key": "PREO8-7",
+          "summary": "Старт продаж ПРЕО 8 СП",
+          "endPlan": "2025-10-15",
+          "endFact": "2025-11-13",
+          "endForecast": "2025-11-13"
+        },
+        {
+          "key": "PREO8-13",
+          "summary": "ЗОС ПРЕО 8",
+          "endPlan": "2027-10-14",
+          "endFact": null,
+          "endForecast": "2027-10-14"
+        },
+        {
+          "key": "PREO8-15",
+          "summary": "РнВ ПРЕО 8",
+          "endPlan": "2027-10-29",
+          "endFact": null,
+          "endForecast": "2027-10-29"
+        },
+        {
+          "key": "PREO8-322",
+          "summary": "Выдача ключей ПРЕО 8",
+          "endPlan": "2027-11-30",
+          "endFact": null,
+          "endForecast": "2027-11-30"
+        }
+      ]
     },
     "MS": {
       "id": "MS",
@@ -156321,7 +157016,37 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "MS-22",
+          "summary": "Получение порубочного билета МЫС 1 ИРД",
+          "endPlan": "2024-12-27",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "MS-26",
+          "summary": "РнС МЫС 1 ИРД (Внесение изменений)",
+          "endPlan": "2025-11-14",
+          "endFact": "2025-11-14",
+          "endForecast": "2025-11-14"
+        },
+        {
+          "key": "MS-317",
+          "summary": "ЗОС МЫС 1",
+          "endPlan": "2025-12-18",
+          "endFact": "2025-12-18",
+          "endForecast": "2025-12-18"
+        },
+        {
+          "key": "MS-320",
+          "summary": "РнВ МЫС 1",
+          "endPlan": "2025-12-18",
+          "endFact": "2025-12-24",
+          "endForecast": "2025-12-24"
+        }
+      ]
     },
     "MS103": {
       "id": "MS103",
@@ -160487,7 +161212,51 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "MS103-4",
+          "summary": "РнС МЫС ГП 72.103.4 ИРД (Внесение изменений)",
+          "endPlan": "2025-11-14",
+          "endFact": "2025-11-14",
+          "endForecast": "2025-11-14"
+        },
+        {
+          "key": "MS103-5",
+          "summary": "Старт продаж МЫС ГП 72.103.4 СП",
+          "endPlan": "2024-05-10",
+          "endFact": "2024-05-10",
+          "endForecast": "2024-05-10"
+        },
+        {
+          "key": "MS103-6",
+          "summary": "Принятие решения о финансировании на комитете/ открытие ПФ МЫС ГП 72.103.4 ПФ",
+          "endPlan": "2024-09-10",
+          "endFact": "2024-09-10",
+          "endForecast": "2024-09-10"
+        },
+        {
+          "key": "MS103-7",
+          "summary": "ЗОС МЫС ГП 72.103.4",
+          "endPlan": "2025-12-02",
+          "endFact": "2025-12-18",
+          "endForecast": "2025-12-18"
+        },
+        {
+          "key": "MS103-8",
+          "summary": "РнВ МЫС ГП 72.103.4",
+          "endPlan": "2025-12-18",
+          "endFact": "2025-12-24",
+          "endForecast": "2025-12-24"
+        },
+        {
+          "key": "MS103-9",
+          "summary": "Выдача ключей МЫС ГП 72.103.4",
+          "endPlan": "2026-06-30",
+          "endFact": "2026-06-23",
+          "endForecast": "2026-06-23"
+        }
+      ]
     },
     "MS108": {
       "id": "MS108",
@@ -165152,7 +165921,58 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "MS108-2",
+          "summary": "ПИР Разработка проекта НВФ МЫС ГП-108п",
+          "endPlan": "2025-08-26",
+          "endFact": "2025-08-26",
+          "endForecast": "2025-08-26"
+        },
+        {
+          "key": "MS108-6",
+          "summary": "РнС МЫС ГП 72.108 ИРД (Внесение изменений)",
+          "endPlan": "2025-11-05",
+          "endFact": "2025-11-05",
+          "endForecast": "2025-11-05"
+        },
+        {
+          "key": "MS108-7",
+          "summary": "Старт продаж МЫС ГП 72.108 СП",
+          "endPlan": "2024-05-10",
+          "endFact": "2024-05-10",
+          "endForecast": "2024-05-10"
+        },
+        {
+          "key": "MS108-8",
+          "summary": "Принятие решения о финансировании на комитете/ открытие ПФ МЫС ГП 72.108 ПФ",
+          "endPlan": "2024-09-10",
+          "endFact": "2024-09-10",
+          "endForecast": "2024-09-10"
+        },
+        {
+          "key": "MS108-9",
+          "summary": "ЗОС МЫС ГП 72.108",
+          "endPlan": "2025-12-15",
+          "endFact": "2025-12-15",
+          "endForecast": "2025-12-15"
+        },
+        {
+          "key": "MS108-10",
+          "summary": "РнВ МЫС ГП 72.108",
+          "endPlan": "2025-12-18",
+          "endFact": "2025-12-24",
+          "endForecast": "2025-12-24"
+        },
+        {
+          "key": "MS108-11",
+          "summary": "Выдача ключей МЫС ГП 72.108",
+          "endPlan": "2026-06-30",
+          "endFact": "2026-06-18",
+          "endForecast": "2026-06-18"
+        }
+      ]
     },
     "MS2": {
       "id": "MS2",
@@ -173608,7 +174428,44 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "MS2-30",
+          "summary": "Получение РнС МЫС 2 + 110 ДДУ ПИР",
+          "endPlan": "2025-10-29",
+          "endFact": "2025-10-29",
+          "endForecast": "2025-10-29"
+        },
+        {
+          "key": "MS2-40",
+          "summary": "Старт продаж МЫС 2 + 110 ДДУ СП",
+          "endPlan": "2026-02-12",
+          "endFact": "2026-02-12",
+          "endForecast": "2026-02-12"
+        },
+        {
+          "key": "MS2-312",
+          "summary": "ЗОС МЫС 2 + 110 ДДУ",
+          "endPlan": "2028-10-30",
+          "endFact": null,
+          "endForecast": "2028-10-30"
+        },
+        {
+          "key": "MS2-315",
+          "summary": "РнВ МЫС 2 + 110 ДДУ",
+          "endPlan": "2028-11-17",
+          "endFact": null,
+          "endForecast": "2028-11-17"
+        },
+        {
+          "key": "MS2-316",
+          "summary": "Выдача ключей МЫС 2 + 110 ДДУ",
+          "endPlan": "2028-12-30",
+          "endFact": null,
+          "endForecast": "2028-12-30"
+        }
+      ]
     },
     "MS3": {
       "id": "MS3",
@@ -183115,7 +183972,37 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "MS3-41",
+          "summary": "РнС Мириады 3",
+          "endPlan": "2027-01-30",
+          "endFact": null,
+          "endForecast": "2027-01-30"
+        },
+        {
+          "key": "MS3-53",
+          "summary": "Старт продаж Мириады 3",
+          "endPlan": "2027-03-18",
+          "endFact": null,
+          "endForecast": "2027-03-18"
+        },
+        {
+          "key": "MS3-493",
+          "summary": "ЗОС Мириады 3",
+          "endPlan": "2029-08-31",
+          "endFact": null,
+          "endForecast": "2029-08-31"
+        },
+        {
+          "key": "MS3-496",
+          "summary": "РнВ Мириады 3",
+          "endPlan": "2029-10-03",
+          "endFact": null,
+          "endForecast": "2029-10-03"
+        }
+      ]
     },
     "BR1": {
       "id": "BR1",
@@ -192327,7 +193214,44 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "BR1-23",
+          "summary": "Получение порубочного билета Беринг 1  ИРД",
+          "endPlan": "2024-12-27",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "BR1-26",
+          "summary": "Получение РнС Беринг 1  ИРД",
+          "endPlan": "2023-11-20",
+          "endFact": "2023-11-20",
+          "endForecast": "2023-11-20"
+        },
+        {
+          "key": "BR1-34",
+          "summary": "Старт продаж Беринг 1 СП",
+          "endPlan": "2023-12-20",
+          "endFact": "2023-12-20",
+          "endForecast": "2023-12-20"
+        },
+        {
+          "key": "BR1-252",
+          "summary": "ЗОС  Беринг 1",
+          "endPlan": "2025-10-30",
+          "endFact": "2025-10-30",
+          "endForecast": "2025-10-30"
+        },
+        {
+          "key": "BR1-255",
+          "summary": "РнВ Беринг 1",
+          "endPlan": "2025-12-25",
+          "endFact": "2025-12-25",
+          "endForecast": "2025-12-25"
+        }
+      ]
     },
     "LB2": {
       "id": "LB2",
@@ -200858,7 +201782,51 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "LB2-2",
+          "summary": "Получение порубочного билета Беринг 2 ИРД",
+          "endPlan": "2024-12-27",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "LB2-4",
+          "summary": "Получение РнС Беринг 2 ИРД",
+          "endPlan": "2024-12-27",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "LB2-7",
+          "summary": "Старт продаж Беринг 2 СП",
+          "endPlan": "2025-11-25",
+          "endFact": "2025-11-25",
+          "endForecast": "2025-11-25"
+        },
+        {
+          "key": "LB2-14",
+          "summary": "ЗОС Беринг 2",
+          "endPlan": "2027-10-14",
+          "endFact": null,
+          "endForecast": "2027-10-14"
+        },
+        {
+          "key": "LB2-16",
+          "summary": "РнВ Беринг 2",
+          "endPlan": "2027-11-04",
+          "endFact": null,
+          "endForecast": "2027-11-04"
+        },
+        {
+          "key": "LB2-367",
+          "summary": "Выдача ключей Беринг 2",
+          "endPlan": "2027-12-30",
+          "endFact": null,
+          "endForecast": "2027-12-30"
+        }
+      ]
     },
     "LB3": {
       "id": "LB3",
@@ -211158,7 +212126,51 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "LB3-2",
+          "summary": "Получение порубочного билета Беринг 3.1  ",
+          "endPlan": "2025-06-30",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "LB3-4",
+          "summary": "Внесение изменений в РнС Беринг 3.1 (одновременно с 3.2)",
+          "endPlan": "2026-09-24",
+          "endFact": null,
+          "endForecast": "2026-09-26"
+        },
+        {
+          "key": "LB3-7",
+          "summary": "Старт продаж Беринг 3.1 ",
+          "endPlan": "2026-11-19",
+          "endFact": null,
+          "endForecast": "2026-11-19"
+        },
+        {
+          "key": "LB3-14",
+          "summary": "ЗОС Беринг 3.1",
+          "endPlan": "2029-08-23",
+          "endFact": null,
+          "endForecast": "2029-08-23"
+        },
+        {
+          "key": "LB3-16",
+          "summary": "РнВ Беринг 3.1",
+          "endPlan": "2029-09-28",
+          "endFact": null,
+          "endForecast": "2029-09-28"
+        },
+        {
+          "key": "LB3-356",
+          "summary": "Выдача ключей Беринг 3.1",
+          "endPlan": "2029-12-27",
+          "endFact": null,
+          "endForecast": "2029-12-27"
+        }
+      ]
     },
     "B32": {
       "id": "B32",
@@ -222007,7 +223019,37 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "B32-41",
+          "summary": "Внесение изменений в РнС Беринг 3.2 (одновременно с 3.1)",
+          "endPlan": "2026-09-24",
+          "endFact": null,
+          "endForecast": "2026-09-26"
+        },
+        {
+          "key": "B32-53",
+          "summary": "Старт продаж Беринг 3.2",
+          "endPlan": "2027-10-12",
+          "endFact": null,
+          "endForecast": "2027-10-12"
+        },
+        {
+          "key": "B32-493",
+          "summary": "ЗОС Беринг 3.2",
+          "endPlan": "2030-09-02",
+          "endFact": null,
+          "endForecast": "2030-09-02"
+        },
+        {
+          "key": "B32-496",
+          "summary": "РнВ Беринг 3.2",
+          "endPlan": "2030-09-25",
+          "endFact": null,
+          "endForecast": "2030-09-25"
+        }
+      ]
     },
     "LB4": {
       "id": "LB4",
@@ -223410,7 +224452,8 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": []
     },
     "NU81": {
       "id": "NU81",
@@ -230051,7 +231094,37 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "NU81-22",
+          "summary": "Получение РнС НУР 81 ИРД",
+          "endPlan": "2023-03-20",
+          "endFact": "2023-03-20",
+          "endForecast": "2023-03-20"
+        },
+        {
+          "key": "NU81-30",
+          "summary": "Старт продаж НУР 81 СП",
+          "endPlan": "2024-03-15",
+          "endFact": "2024-03-15",
+          "endForecast": "2024-03-15"
+        },
+        {
+          "key": "NU81-133",
+          "summary": "ЗОС НУР 81",
+          "endPlan": "2025-09-30",
+          "endFact": "2025-09-30",
+          "endForecast": "2025-09-30"
+        },
+        {
+          "key": "NU81-136",
+          "summary": "РнВ НУР 81",
+          "endPlan": "2025-10-21",
+          "endFact": "2025-10-21",
+          "endForecast": "2025-10-21"
+        }
+      ]
     },
     "NU82": {
       "id": "NU82",
@@ -240492,7 +241565,51 @@
           ]
         }
       },
-      "dataUpdatedAt": "2026-09-13T22:18:26+05:00"
+      "dataUpdatedAt": "2026-09-13T22:18:26+05:00",
+      "milestones": [
+        {
+          "key": "NU82-2",
+          "summary": "Получение порубочного билета НУР 82-83 ИРД",
+          "endPlan": "2024-12-27",
+          "endFact": "2024-12-27",
+          "endForecast": "2024-12-27"
+        },
+        {
+          "key": "NU82-4",
+          "summary": "Получение РнС НУР 82-83 ИРД",
+          "endPlan": "2023-11-20",
+          "endFact": "2023-11-20",
+          "endForecast": "2023-11-20"
+        },
+        {
+          "key": "NU82-7",
+          "summary": "Старт продаж НУР 82-83 СП",
+          "endPlan": "2023-12-15",
+          "endFact": "2023-12-15",
+          "endForecast": "2023-12-15"
+        },
+        {
+          "key": "NU82-13",
+          "summary": "ЗОС НУР 82-83",
+          "endPlan": "2026-09-09",
+          "endFact": null,
+          "endForecast": "2026-10-10"
+        },
+        {
+          "key": "NU82-15",
+          "summary": "РнВ НУР 82-83",
+          "endPlan": "2026-09-30",
+          "endFact": null,
+          "endForecast": "2026-10-01"
+        },
+        {
+          "key": "NU82-16",
+          "summary": "Выдача ключей НУР 82-83",
+          "endPlan": "2026-12-30",
+          "endFact": null,
+          "endForecast": "2026-12-30"
+        }
+      ]
     }
   },
   "scurve-export-pending": "",
